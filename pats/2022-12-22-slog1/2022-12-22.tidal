@@ -1,0 +1,41 @@
+-- RYTM kit40
+
+let 
+    modx pat = ccv pat # ccn 1 # s "harmor"
+    mody pat = ccv pat # ccn 2 # s "harmor"
+    modz pat = ccv pat # ccn 3 # s "harmor"
+    detune pat = ccv pat # ccn 4 # s "harmor"
+    prism pat = ccv pat # ccn 5 # s "harmor"
+    xfade pat = ccv pat # ccn 6 # s "harmor"
+    g x = (const $ s "~") $ x
+
+d1 $ fast 8 $ xfade 0 # midichan 0
+
+do  
+  let allOn x = id $ x
+      kickOn = buttonOn button9
+      snareOn = buttonOn button10
+      stab1On = buttonOn button11
+      stab2On = buttonOn button12
+      cpsMin = (range 0.1 1 $ knob13)
+      cpsMax = (range 1 20 $ knob14)
+  d1
+    $ allOn
+    $ (|* cps ((range cpsMin cpsMax) $ (71 ~>) $ rand))
+    $ (|* cps "1*6")
+    $ (|* cps (segment 1 $ range 0.5 1.5 $ (378 ~>) $ rand))
+    $ (|* cps "<1 1.25 1 1.5 0.666>")
+    $ stack [
+      kickOn $ amp 1 # midichan "<0 ~>" # note "c5" # s "syntakt" 
+      , snareOn $ amp 1 # midichan "<~ 1>" # note "c5" # s "syntakt" 
+      , stab1On $ amp "<1 ~>" # midichan "<9 ~>" # note "<c5 ~>" # s "harmor"
+      , stab2On $ amp "<~ 1>" # midichan "<~ 4>" # note "<~ a4>" # s "harmor"
+    ] # cps ((100/120/2) * "<1 1.75>")
+
+
+hush
+
+d1 $ s "syntakt" # midichan 0 # note "c5" # amp 1
+
+
+d1 $ s "harmor" # midichan 9 # note "c5" # amp 1 # legato 0.5 # cps 1

@@ -1,0 +1,24 @@
+
+
+do
+  let plies = ("<<1> <1 1 1> <1>>" * "<1 30 1>")
+  let modp x = sometimesBy 0.5 (plyWith "<2 3>" id . (|* cps 0.5)) $ x
+  d1
+    $ (|* cps (range 0.25 1.5 $ slow 7 tri))
+    $ (|* cps (segment 1 $ range 0.25 1.5 $ (33 ~>) $ rand))
+    $ (|+ note "-1")
+    $ someCyclesBy 0.1 rev
+    $ (1 ~>)
+    $ someCyclesBy 0.5 (|* cps (range 0.25 2 $ saw))
+    $ stack [
+      modp $ plyWith plies (|* amp 0.85) $ midichan "<1 0 2>" # s "syntakt" # note "c5" # amp 1
+      , struct "<1 ~ 1>" $ s "syntakt" # midichan 0 # note "c5" # amp 0.01
+      , modp $ plyWith plies (|* amp 0.97) $ midichan "<~ 1 ~>" # s "harmor" # note "c5" # amp 1
+      , sometimes (|+ note "{-12 -24 -12}%20") 
+        $ (|+ note (scale "prometheus" $ choose [-10,-9..10])) 
+        $ modp 
+        $ plyWith (segment 1 $ (3 ~>) $ choose [2,3..10]) (id . (|* amp 0.9)) $ amp "<~ ~ 1>" # s "syntakt" # midichan 4 # note "c5" 
+    ] # cps "<3 0.5 1>"
+  p "prog" $ progNum "1*8" # s "syntakt" # midichan 13 
+
+hush

@@ -1,0 +1,13 @@
+do
+  d1
+    $ slow "<1 1 [0.75 0.666]/2>"
+    $ every "<4 3>" (const $ (|* cps "<2 3 1>") $ stack [  midichan "[1 3*3]" # note "c5" # amp 1 # s "syntakt", s "harmor" # midichan "[0]" # note "c5" # amp 0.1 ])
+    $ superimpose ((# s "syntakt"))
+    $ stack [
+      amp "{1@2 1@2 1@2 1@2 1@2 1@2 1@2 1@10 1@12 1 1 1 1 1@3 1@3 1@3 1@3}%16" # midichan 0 # note "c5" # amp 1
+    ] # s "harmor" # cps 1
+
+  d2
+    $ slow "<2 3 4>" $ s "syntakt" # midichan 4 # note "c5" # amp 0.8
+
+    hush

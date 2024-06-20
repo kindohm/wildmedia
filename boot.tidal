@@ -1,0 +1,79 @@
+let
+  shiftBy num x = (num ~>) $ x
+  shift x = shiftBy 1 $ x
+  g x = (const $ s "~") $ x
+  button1 = (cI 0 "64")
+  button9 = (cI 0 "72")
+  button10 = (cI 0 "73")
+  button11 = (cI 0 "74")
+  button12 = (cI 0 "75")
+  knob13 = (cF 0 "12")
+  knob14 = (cF 0 "13")
+  knob16 = (cF 0 "15")
+  allOn = every ( range 1 0 $ button1 ) g
+  toggleIt x = every (range 1 0 $ x) g
+  toggle = toggleIt
+  onoff = toggle
+  gtfo = onoff
+  modx pat = ccv pat # ccn 1
+  mody pat = ccv pat # ccn 2
+  modz pat = ccv pat # ccn 3
+  xfade pat = ccv pat # ccn 4
+  phtype pat = ccv pat # ccn 5
+  buttonOn x = every (range 1 0 $ x) g
+  tempoToCps ttt = ((range 10 522 $ ttt)/240)
+  sendTempo ttt = ccn 100 # ccv (quantise 1 (range 0 127 $ ttt)) # s "harmor" # midichan 15
+  modT prob min max x = someCyclesBy prob (|*| (segment 1 $ range min max $ shiftBy 13 $ rand)) $ shift $ x
+  modTime = modT
+  cpsWTF x = cps (tempoToCps x)
+
+  
+
+
+
+
+
+
+  --- NO NOT THIS.
+let
+  knob1 = (cF 0 "64")
+  knob2 = (cF 0 "66")
+  knob3 = (cF 0 "68")
+  knob4 = (cF 0 "70")
+  knob5 = (cF 0 "72")
+  knob5i = (cI 0 "72")
+  knob6 = (cF 0 "74")
+  knob7 = (cF 0 "76")
+  knob8 = (cF 0 "78")
+  knob9 = (cF 0 "80")
+  knob10 = (cF 0 "82")
+  knob11 = (cF 0 "84")
+  knob12 = (cF 0 "86")
+  knob13 = (cF 0 "88")
+  knob14 = (cF 0 "90")
+  knob15 = (cF 0 "92")
+  knob16 = (cF 0 "94")
+  knob17 = (cF 0 "96")
+  knob18 = (cF 0 "98")
+  knob19 = (cF 0 "100")
+  knob20 = (cF 0 "102")
+  button1 = (cI 0 "65")
+  button2 = (cI 0 "67")
+  button3 = (cI 0 "69")
+  button4 = (cI 0 "71")
+  button5 = (cI 0 "73")
+  button6 = (cI 0 "75")
+  button7 = (cI 0 "77")
+  button8 = (cI 0 "79")
+  button9 = (cI 0 "81")
+  button10 = (cI 0 "83")
+  button11 = (cI 0 "85")
+  button12 = (cI 0 "87")
+  button13 = (cI 0 "89")
+  button14 = (cI 0 "91")
+  button15 = (cI 0 "93")
+  button16 = (cI 0 "95")
+  button17 = (cI 0 "97")
+  button18 = (cI 0 "99")
+  button19 = (cI 0 "101")
+  button20 = (cI 0 "103")

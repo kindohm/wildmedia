@@ -1,0 +1,31 @@
+
+
+do
+  let pat = "{1@4 1@4 0@8 1@3 1@6 0@2 1 1 1 1 1 }%16"
+  d1    
+    $ (|* cps (segment 1 $ range 0.5 1 $ shiftBy 11 $ rand))
+    $ shift
+    $ someCyclesBy 0.5 rev
+    $ shift
+    $ someCyclesBy 0.5 (iter 8)
+    $ stack [
+      struct pat $ s "harmor" # midichan 0 # note "c5" # amp 1
+      , struct (inv pat) $ s "harmor" # midichan 0 # note "c5" # amp 0.1
+      , struct pat $ s "harmor" # midichan 1 # note "c5" # amp 0.1
+      , struct (inv pat) $ s "harmor" # midichan 1 # note "c5" # amp (shiftBy 4448 $ choose [0.1,0.1,1])
+      , struct (pat) $ s "syntakt" # midichan 0 # note "c5" # amp 1
+      , ("3/16" ~>) $ struct pat $ s "syntakt" # midichan 4 # note "c5" # amp 0.5
+      , struct (inv pat) $ s "syntakt" # midichan 9 # note "c5" # amp 1
+    ] # cps 0.4
+  d2 $ fast 2 $ s "syntakt" # midichan 1 # note "c5" # amp 1
+
+
+hush
+
+do
+  d1
+    $ stack [
+      plyWith 5 (# amp 0.4) $ s "syntakt" # midichan 0 # note "c5" # amp 1
+      , mask "<0 0 0 0 1>" $ s "syntakt" # midichan 1 # note "c5" # amp 1
+      , slow 5 $ s "harmor" # midichan 0 # note "c5" # amp 1
+    ] # cps "<6 3 4 2 2.5>"

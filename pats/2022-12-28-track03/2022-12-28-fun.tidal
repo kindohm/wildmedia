@@ -1,0 +1,25 @@
+-- rytm kit55
+
+do
+  let plies = (segment 1 $ choose [5,6..90])
+  d1  
+    $ (|* cps (range 0.9 1.4 $ saw))
+    $ (|* cps (segment 1 $ range 0.5 2 $ slow 5 $ perlin))
+    $ (|* cps (segment 1 $ range 0.6 1.3 $ (101 ~>) $ rand))
+    $ every 2 (const $ stack [s "rytm" # midichan 3 # note "c3" # amp 1, s "harmor" # midichan 1 # note "c5" # amp 1])
+    $ (|* cps ((64/plies) + (plies * 0.01)))
+    $ stack [
+      plyWith plies (|* amp 0.96) $ s "rytm" # midichan 0 # note "c3" # amp 1
+      , s "harmor" # midichan 0 # note "c5" # amp 1
+    ] # cps 0.1
+  d2
+    $ every 2 (const $ s "[camrotoff, celltranson, cellroton, cellgrowon]")
+    $ stack [
+      plyWith plies id $ s "add"
+      , s "celltransoff"
+      , s "camroton"
+      , s "cellrotoff"
+      , s "cellgrowoff"
+    ]
+
+    hush
