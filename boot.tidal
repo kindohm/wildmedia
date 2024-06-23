@@ -22,13 +22,36 @@ let
   phtype pat = ccv pat # ccn 5
   buttonOn x = every (range 1 0 $ x) g
   tempoToCps ttt = ((range 10 522 $ ttt)/240)
-  sendTempo ttt = ccn 100 # ccv (quantise 1 (range 0 127 $ ttt)) # s "harmor" # midichan 15
+  sendTempo ttt = ccn 100 # ccv (quantise 1 (range 0 127 $ ttt)) # s "harmor2" # midichan 15
   modT prob min max x = someCyclesBy prob (|*| (segment 1 $ range min max $ shiftBy 13 $ rand)) $ shift $ x
   modTime = modT
   cpsWTF x = cps (tempoToCps x)
 
-  
+hush
 
+d1 $ ccn 100 # ccv (quantise 1 (range 0 127 $ 50)) # s "harmor2" # midichan 15
+
+
+once 
+  $ stack [ 
+    ccn 1 # ccv (range 0 127 $ (1 ~>) $ rand)
+    , ccn 2 # ccv (range 0 127 $ (2 ~>) $ rand)
+    , ccn 3 # ccv (range 0 127 $ (3 ~>) $ rand)
+    , ccn 4 # ccv (range 0 127 $ (4 ~>) $ rand)
+    , ccn 6 # ccv (range 0 127 $ (5 ~>) $ rand)
+    , ccn 7 # ccv (range 0 127 $ (6 ~>) $ rand)
+    , ccn 8 # ccv (range 0 127 $ (7 ~>) $ rand)
+    , ccn 9 # ccv (range 0 127 $ (8 ~>) $ rand)
+  ] # s "harmor2" # midichan 0
+
+  hush
+
+d1 
+  $ fast 16 
+  $ s "harmor2" 
+  # midichan 0 
+  # ccn 10
+  # ccv (range 0 127 $ rand)
 
 
 

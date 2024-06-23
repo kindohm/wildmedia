@@ -1,0 +1,12 @@
+
+
+do
+  let pat = "1@3 1@4"
+  d1
+    $ stack [
+      plyWith 10 (|* amp 0.85) $ amp pat # midichan 0 # s "syntakt" # note "d5@3 c5@4"
+      , (0.25 ~>) $ s "syntakt" # midichan 1 # note "c5" # amp 1
+    ] # cps 0.333
+  p "prog" $ progNum "4*8" # s "syntakt" # midichan 13 
+
+hush
