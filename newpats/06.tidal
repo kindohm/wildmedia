@@ -1,0 +1,31 @@
+
+
+do
+  let pat = "<5 3 4 3 2 7 15 15>"
+      reps = "<10>"
+  d1
+    $ (|* cps (segment 1 $ range 1 1 $ shiftBy 5 $ rand))
+    $ every 0 (
+      const $ stack [ s "syntakt" # midichan 9 # note "c5" # amp 1] # cps 2
+    )
+    $ foldEvery [2,3,4] (1 ~>)
+    $ stack [
+      g $ superimpose (# note "[f5,b5,d6,g6,a6]") 
+        $ plyWith ((reps/) $ pat) ((|* legato 0.9) . (# amp 0.6)) 
+        $ s "harmor" # midichan 8 # note "[c5]" # amp 1
+      ,g $ plyWith ((reps/) $ pat) (# amp 0.6) 
+        $ s "syntakt" # midichan 0 # note "c5" # amp 1
+      , g $ s "syntakt" # midichan 2 # note "e4" # amp 1
+    ] # cps ("0.6" * pat)
+  d2
+    $ stack [
+      g $ mask "<1 0 0 0>" 
+        $ plyWith ((reps/) $ pat) (# amp 0.3) 
+        $  s "syntakt" # midichan 1 # note "c5" # amp 1
+      , mask "<1 0 0 0>" 
+        $ s "syntakt" # midichan 2 # note "e4" # amp 0.01
+    ]
+  p "prog" $ progNum "5*8" # s "syntakt" # midichan 13 
+
+
+hush
