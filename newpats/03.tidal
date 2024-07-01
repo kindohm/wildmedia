@@ -3,24 +3,24 @@
 hush
 
 do
-  let ttt = modT 0.5 0.125 1.5 $ modT 0.5 0.125 1.5 $ ((range 0.125 1.5 $ slow 10 tri) * "0.28")
+  let ttt = modT 0.5 0.1 1 $ modT 0.5 0.1 1 $ ((range 0.2 1 $ slow 10 tri) * "0.28")
       pat = "{1@4 1@6 1@2 1@2 1 1 1 0@10}%16"
   d1
     $ someCyclesBy 0.5 (iter 8)
     $ shift
     $ someCyclesBy 0.5 rev
     $ shift
-    $ rarely (|+ note 1)
+    $ sometimesBy 0.2 (|+ note "{1 2 3}%16")
     $ shift
     $ stack [
       struct pat $ sendTempo ttt
-      , g $ struct pat $ s "harmor" # midichan 2 # note "c5" # amp 1
+      , struct pat $ s "harmor" # midichan 2 # note "c5" # amp 1
       , struct (inv pat) $ s "harmor" # midichan 2 # note "c5" # amp 0.1
-      , g $ degradeBy 0 $ struct (inv pat) $ s "harmor" # midichan 3 # note "c5" # amp 1
+      , degradeBy 0 $ struct (inv pat) $ s "harmor" # midichan 3 # note "c5" # amp 1
       , struct pat $ s "harmor" # midichan 3 # note "c5" # amp 0.1
-      , stutWith "{2 3 2}%16" 0.0625 (# midichan 3) $ struct pat $ s "syntakt" # midichan 0 # note "c5" # amp 1
-      , struct (inv pat) $ s "syntakt" # midichan 2 # note "c5" # amp 1
-      , mask pat $ s "syntakt*16" # midichan 1 # note "c5" # amp (range 0.2 1 $ shiftBy 4 $ rand)
+      , g $ stutWith "{2 3 2}%16" 0.0625 (# midichan 3) $ struct pat $ s "syntakt" # midichan 0 # note "c5" # amp 1
+      ,g $  struct (inv pat) $ s "syntakt" # midichan 2 # note "c5" # amp 1
+      , g $ mask pat $ s "syntakt*16" # midichan 1 # note "c5" # amp (range 0.2 1 $ shiftBy 4 $ rand)
     ]  # cpsWTF ttt
   d2
     $ slow 4 $ sometimesBy 0.5 (|+ note "12") $ s "syntakt" # midichan 4 # note "cs6" # amp 1

@@ -1,14 +1,15 @@
-
+hush
 
 do
   let plies = ("<<1> <1 1 1> <1>>" * "<1 30 1>")
-  let modp x = sometimesBy 0 (plyWith "<2 3>" id . (|* cps 0.5)) $ x
+  let modp x = sometimesBy 0.5 (plyWith "<2 3>" id . (|* cps 0.5)) $ x
   d1
     $ (1000 ~>)
-    $ (|* cps (range 0.25 1.5 $ slow 7 tri))
-    $ (|* cps (segment 1 $ range 0.25 1.5 $ (33 ~>) $ rand))
+    $ (|* cps (range 0.25 3 $ slow 7 tri))
+    $ (|* cps (segment 1 $ range 0.1 4 $ (33 ~>) $ rand))
     $ (|+ note "-1")
-    $ someCyclesBy 0.1 rev
+    $ (1 ~>)
+    $ someCyclesBy 0.5 rev
     $ (1 ~>)
     $ someCyclesBy 0.5 (|* cps (range 0.25 2 $ saw))
     $ stack [

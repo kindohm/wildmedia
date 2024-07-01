@@ -1,14 +1,14 @@
 
 
 do
-  let ttt = ((segment 1 $ range 0.1 1.5 $ shiftBy 3 $ rand) *  "<0.2 0.4>")
+  let ttt = ((segment 1 $ range 0.3 1 $ shiftBy 3 $ rand) *  "<0.2 0.4>")
   d1
     $ stack [
       struct "<1 0>" $ midichan 6 # note "c5" # amp 1 # s "harmor"
       , struct "<0 1>" $ midichan 6 # note "c5" # amp 0.1 # s "harmor"
-      , g $ struct "<0 1>" $ midichan 7 # note "c5" # amp 1 # s "harmor"
-      , g $ struct "< 1 0>" $ midichan 7 # note "c5" # amp 0.1 # s "harmor"
-      , midichan "<8 9>" # s "syntakt" # note "c5" # amp 1
+      , struct "<0 1>" $ midichan 7 # note "c5" # amp 1 # s "harmor"
+      , struct "< 1 0>" $ midichan 7 # note "c5" # amp 0.1 # s "harmor"
+      , midichan "< 8 9>" # s "syntakt" # note "c5" # amp 1
       , (0.5 ~>) 
         $ shift $ slow 4 
         $ midichan "4" # s "syntakt" # note "c5" # amp 1

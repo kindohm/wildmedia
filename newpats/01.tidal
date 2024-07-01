@@ -3,7 +3,7 @@ hush
 do
     let pat = "{1@6 1 1 1 0@7 1@4 }%16"
     d1
-        $ (|* cps (segment 1 $ range 0.125 1.5 $ (3 ~>) $ rand))
+        $ (|* cps (segment 1 $ range 0.25 1 $ (3 ~>) $ rand))
         $ (1 ~>)
         $ someCyclesBy 0.5 (iter 8)
         $ (1 ~>)
@@ -17,12 +17,14 @@ do
             struct pat $ s "harmor" # midichan 0 # note "c5" # amp 1
             , struct (inv pat) $ s "harmor" # midichan 0 # note "c5" # amp 0.1
             , struct pat $ s "harmor" # midichan 14 # note "c5" # amp 0.1
-            , g $ degradeBy 0 $  struct (inv pat) $ s "harmor" # midichan 14 # note "c5" # amp 1
+            , degradeBy 0 $  struct (inv pat) $ s "harmor" # midichan 14 # note "c5" # amp 1
             , off "1s" (# midichan 3) $ struct pat $ s "syntakt" # midichan 0 # note "c5" # amp 1
             , struct (inv pat) $ s "syntakt" # midichan 0 # note "c5" # amp 0.01
             , struct (inv pat) $ s "syntakt" # midichan 2 # note "c5" # amp 1
         ] # cps (160/120/2)
     p "prog" $ progNum "1*8" # s "syntakt" # midichan 13 
 
+
+d1 $ s "harmor" # midichan 8  # note "c5" # legato 0.5 # amp 0.7
 
         hush
